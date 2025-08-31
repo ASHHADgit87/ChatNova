@@ -1,33 +1,61 @@
-import React from 'react'
-import './RightSidebar.css'
-import assets from '../../assets/assets'
+import React, { useContext, useEffect, useState } from "react";
+import "./RightSidebar.css";
+import assets from "../../assets/assets";
+import { logout } from "../../config/Firebase";
+import { AppContext } from "../../context/AppContext";
 const RightSidebar = () => {
-  return (
-    <div className='rs'>
-            <div className="rs-profile">
-              <img src={assets.profile_img} alt=''/>
-              <h3>Richard Sanford<img src={assets.green_dot} className='dot' alt=''/></h3>
-              <p>Hey, There i am Richard Sanford using Chat Nova</p>
-            </div>
-            <hr/>
-            <div className="rs-media">
-              <p>
-                Media
-              </p>
-              <div>
-                <img src={assets.pic1} alt="" />
-                <img src={assets.pic2} alt="" />
-                <img src={assets.pic3} alt="" />
-                <img src={assets.pic4} alt="" />
-                <img src={assets.pic1} alt="" />
-                <img src={assets.pic2} alt="" />
-              </div>
-            </div>
-            <button>
-              Logout
-            </button>
-    </div>
-  )
-}
+  const { chatUser, messages } = useContext(AppContext);
+  const [msgImages, setMsgImages] = useState([]);
+  useEffect(() => {
+    let tempVar = [];
+    messages.forEach((msg) => {
+      if (msg.image) {
+        tempVar.push({ type: "image", url: msg.image });
+      }
+      if (msg.video) {
+        tempVar.push({ type: "video", url: msg.video });
+      }
+    });
+    setMsgImages(tempVar);
+  }, [messages]);
 
-export default RightSidebar
+  return chatUser ? (
+    <div className="rs">
+      <div className="rs-profile">
+        <img src={chatUser.userData.avatar} alt="" />
+        <h3>
+          {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
+            <img src={assets.green_dot} className="dot" alt="" />
+          ) : null}{" "}
+          {chatUser.userData.name}
+        </h3>
+        <p>{chatUser.userData.bio}</p>
+      </div>
+      <hr />
+      <div className="rs-media">
+        <p>Media</p>
+        <div>
+          {msgImages.map((media, index) =>
+            media.type === "image" ? (
+              <img
+                onClick={() => window.open(media.url)}
+                key={index}
+                src={media.url}
+                alt=""
+              />
+            ) : (
+              <video key={index} src={media.url} controls />
+            )
+          )}
+        </div>
+      </div>
+      <button onClick={() => logout()}>Logout</button>
+    </div>
+  ) : (
+    <div className="rs">
+      <button onClick={() => logout()}>Logout</button>
+    </div>
+  );
+};
+
+export default RightSidebar;
