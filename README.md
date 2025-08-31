@@ -30,6 +30,6 @@
 - View all shared media in the chat’s right sidebar
 - Notifications for new messages
 
-## How to Run
+## Getting Started
 
 
