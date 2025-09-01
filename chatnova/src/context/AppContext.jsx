@@ -1,7 +1,7 @@
 // src/context/AppContext.jsx
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { createContext, useEffect, useRef, useState } from "react";
-import { auth, db } from "../config/Firebase";
+import { auth, db } from "../config/Firebase-temp";
 import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext();

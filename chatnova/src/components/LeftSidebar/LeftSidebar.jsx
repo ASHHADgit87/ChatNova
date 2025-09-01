@@ -14,7 +14,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { db } from "../../config/Firebase";
+import { db } from "../../config/Firebase-temp";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 export const LeftSidebar = () => {

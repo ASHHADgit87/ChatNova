@@ -9,7 +9,7 @@ import {
   onSnapshot,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../config/Firebase";
+import { db } from "../../config/Firebase-temp";
 import { toast } from "react-toastify";
 import uploadToCloudinary from "../../lib/cloudinary";
 
