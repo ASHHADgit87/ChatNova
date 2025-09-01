@@ -86,7 +86,7 @@ export const LeftSidebar = () => {
           messageSeen: true,
         }),
       });
-      const uSnap = await getDoc(db, "users", user.id);
+      const uSnap = await getDoc(doc(db, "users", user.id));
       const uData = uSnap.data();
       setChat({
         messagesId: newMessageRef.id,
