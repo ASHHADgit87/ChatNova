@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import Chat from "./pages/Chat/Chat";
+import Chat from "./pages/Chats/Chat";
 import ProfileUpdate from "./pages/ProfileUpdate/ProfileUpdate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./config/Firebase";
+import { auth } from "./config/Firebase-temp";
 import { AppContext } from "./context/AppContext";
 const App = () => {
   const navigate = useNavigate();
