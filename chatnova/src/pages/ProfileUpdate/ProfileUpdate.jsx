@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ProfileUpdate.css";
 import assets from "../../assets/assets";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../config/Firebase";
+import { auth, db } from "../../config/Firebase-temp";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
