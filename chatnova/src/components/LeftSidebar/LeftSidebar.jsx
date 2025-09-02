@@ -33,42 +33,43 @@ export const LeftSidebar = () => {
   const [ShowSearch, setShowSearch] = useState(false);
 
   const inputHandler = async (e) => {
-  try {
-    const input = e.target.value;
-    if (input) {
-      setShowSearch(true);
-      const userRef = collection(db, "users");
-      const q = query(
-        userRef,
-        where("username", "==", input.toLowerCase().trim())
-      );
-      const querySnap = await getDocs(q);
-
-      if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
-        const searchedUser = querySnap.docs[0].data();
-
-        // check if chat already exists
-        const userExist = chatData?.some(
-          (chat) =>
-            chat.rId === searchedUser.id || 
-            chat.userData.username.toLowerCase().trim() === searchedUser.username.toLowerCase().trim()
+    try {
+      const input = e.target.value;
+      if (input) {
+        setShowSearch(true);
+        const userRef = collection(db, "users");
+        const q = query(
+          userRef,
+          where("username", "==", input.toLowerCase().trim())
         );
+        const querySnap = await getDocs(q);
 
-        if (!userExist) {
-          setUser(searchedUser);
+        if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
+          const searchedUser = querySnap.docs[0].data();
+
+          // check if chat already exists
+          const userExist = chatData?.some(
+            (chat) =>
+              chat.rId === searchedUser.id ||
+              chat.userData.username.toLowerCase().trim() ===
+                searchedUser.username.toLowerCase().trim()
+          );
+
+          if (!userExist) {
+            setUser(searchedUser);
+          } else {
+            setUser(null); 
+          }
         } else {
-          setUser(null); // already exists, don't show in search
+          setUser(null);
         }
       } else {
-        setUser(null);
+        setShowSearch(false);
       }
-    } else {
-      setShowSearch(false);
+    } catch (error) {
+      console.error("Search error:", error);
     }
-  } catch (error) {
-    console.error("Search error:", error);
-  }
-};
+  };
 
   const addChat = async () => {
     const messagesRef = collection(db, "messages");

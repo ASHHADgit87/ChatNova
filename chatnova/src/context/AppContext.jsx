@@ -1,4 +1,3 @@
-// src/context/AppContext.jsx
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { createContext, useEffect, useRef, useState } from "react";
 import { auth, db } from "../config/Firebase-temp";
@@ -23,14 +22,12 @@ const AppContextProvider = (props) => {
       const data = userSnap.data() || {};
       setUserData(data);
 
-      // route decision
       if (data.avatar && data.name) {
         navigate("/chat");
       } else {
         navigate("/profile");
       }
 
-      // heartbeat
       await updateDoc(userRef, { lastSeen: Date.now() });
 
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -63,7 +60,7 @@ const AppContextProvider = (props) => {
       };
     }
   }, [userData]);
-  // cleanup interval on unmount
+
   useEffect(() => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -72,7 +69,7 @@ const AppContextProvider = (props) => {
 
   const value = {
     userData,
-    setUserData, // << expose this
+    setUserData,
     chatData,
     setChatData,
     loadUserData,

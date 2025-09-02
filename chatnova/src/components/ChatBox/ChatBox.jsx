@@ -63,7 +63,7 @@ const ChatBox = () => {
 
   const sendImage = async (e) => {
     try {
-      const file = e.target.files[0]; // 👈 ye add karo
+      const file = e.target.files[0]; 
       const fileUrl = await uploadToCloudinary(file);
 
       if (fileUrl && messagesId) {

@@ -138,7 +138,6 @@
     background: #3d0c51;
   }
 
-  /* jab chat khuli ho to ls hide ho jaye */
   .ls.hidden {
     display: none;
   }
@@ -155,4 +154,3 @@
     height: calc(100% - 120px);
   }
 }
-

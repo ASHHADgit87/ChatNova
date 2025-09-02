@@ -1,4 +1,3 @@
-// src/lib/cloudinary.js
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 const FOLDER = import.meta.env.VITE_CLOUDINARY_FOLDER || "chatnova";
@@ -32,7 +31,7 @@ const uploadToCloudinary = async (file) => {
   }
 
   const data = await res.json();
-  return data.secure_url; // public https URL
+  return data.secure_url;
 };
 
 export default uploadToCloudinary;
