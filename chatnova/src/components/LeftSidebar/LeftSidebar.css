@@ -129,6 +129,30 @@
 
 @media (max-width: 900px) {
   .ls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
     width: 100%;
+    height: 100%;
+    background: #3d0c51;
+  }
+
+  /* jab chat khuli ho to ls hide ho jaye */
+  .ls.hidden {
+    display: none;
+  }
+
+  .ls-top {
+    padding: 15px;
+  }
+
+  .ls-search {
+    margin-top: 10px;
+  }
+
+  .ls-list {
+    height: calc(100% - 120px);
   }
 }
+

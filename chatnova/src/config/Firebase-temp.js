@@ -38,7 +38,7 @@ const signup = async (username, email, password) => {
 
     await setDoc(doc(db, "users", user.uid), {
       id: user.uid,
-      username: username.toLowerCase(),
+      username: username.toLowerCase().trim(),
       email,
       name: "",
       avatar: "",

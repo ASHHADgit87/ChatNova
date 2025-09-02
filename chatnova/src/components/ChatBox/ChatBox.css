@@ -138,12 +138,31 @@
 @media (max-width: 900px) {
   .chat-box {
     width: 100%;
-    justify-content: center;
+    height: 100vh;
+    background: #f1f5ff;
   }
+
   .chat-user .arrow {
-    display: block;
+    display: block; /* back button */
+    width: 24px;
+    cursor: pointer;
   }
+
   .chat-user .help {
     display: none;
   }
+
+  .chat-msg {
+    height: calc(100% - 120px);
+    padding-bottom: 60px;
+  }
+
+  .chat-input {
+    padding: 8px 12px;
+  }
+
+  .chat-input input {
+    font-size: 14px;
+  }
 }
+

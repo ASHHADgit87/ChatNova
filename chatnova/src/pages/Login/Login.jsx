@@ -10,7 +10,7 @@ const Login = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (currState === "Sign Up") {
-      signup(userName, email, password);
+      signup(userName.toLowerCase().trim(), email, password);
     } else {
       login(email, password);
     }
