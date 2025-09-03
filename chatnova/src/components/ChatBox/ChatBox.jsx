@@ -22,6 +22,9 @@ const ChatBox = () => {
     setMessages,
     chatVisible,
     setChatVisible,
+    rightSidebarVisible,
+    setRightSidebarVisible,
+
   } = useContext(AppContext);
   const [input, setInput] = useState("");
 
@@ -126,7 +129,8 @@ const ChatBox = () => {
     <div className={`chat-box ${chatVisible ? "" : "hidden"}`}>
       <div className="chat-user">
         <img src={chatUser.userData.avatar} alt="" />
-        <p>
+        <p onClick={() => setRightSidebarVisible(true)} 
+    style={{ cursor: "pointer" }}>
           {chatUser.userData.name}
           {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
             <img className="dot" src={assets.green_dot} alt="" />

@@ -4,7 +4,7 @@ import assets from "../../assets/assets";
 import { logout } from "../../config/Firebase-temp";
 import { AppContext } from "../../context/AppContext";
 const RightSidebar = () => {
-  const { chatUser, messages } = useContext(AppContext);
+  const { chatUser, messages,rightSidebarVisible,setRightSidebarVisible } = useContext(AppContext);
   const [msgImages, setMsgImages] = useState([]);
   useEffect(() => {
     let tempVar = [];
@@ -20,42 +20,49 @@ const RightSidebar = () => {
   }, [messages]);
 
   return chatUser ? (
-    <div className="rs">
-      <div className="rs-profile">
-        <img src={chatUser.userData.avatar} alt="" />
-        <h3>
-          {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
-            <img src={assets.green_dot} className="dot" alt="" />
-          ) : null}{" "}
-          {chatUser.userData.name}
-        </h3>
-        <p>{chatUser.userData.bio}</p>
-      </div>
-      <hr />
-      <div className="rs-media">
-        <p>Media</p>
-        <div>
-          {msgImages.map((media, index) =>
-            media.type === "image" ? (
-              <img
-                onClick={() => window.open(media.url)}
-                key={index}
-                src={media.url}
-                alt=""
-              />
-            ) : (
-              <video key={index} src={media.url} controls />
-            )
-          )}
-        </div>
-      </div>
-      <button onClick={() => logout()}>Logout</button>
+  <div className={`rs ${rightSidebarVisible ? "visible" : ""}`}>
+    <div className="rs-profile">
+      <img
+        onClick={() => setRightSidebarVisible(false)} 
+        src={assets.arrow_icon}
+        className="arrow"
+        alt=""
+      />
+      <img src={chatUser.userData.avatar} alt="" />
+      <h3>
+        {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
+          <img src={assets.green_dot} className="dot" alt="" />
+        ) : null}{" "}
+        {chatUser.userData.name}
+      </h3>
+      <p>{chatUser.userData.bio}</p>
     </div>
-  ) : (
-    <div className="rs">
-      <button onClick={() => logout()}>Logout</button>
+    <hr />
+    <div className="rs-media">
+      <p>Media</p>
+      <div>
+        {msgImages.map((media, index) =>
+          media.type === "image" ? (
+            <img
+              onClick={() => window.open(media.url)}
+              key={index}
+              src={media.url}
+              alt=""
+            />
+          ) : (
+            <video key={index} src={media.url} controls />
+          )
+        )}
+      </div>
     </div>
-  );
+    <button onClick={() => logout()}>Logout</button>
+  </div>
+) : (
+  <div className={`rs ${rightSidebarVisible ? "visible" : ""}`}>
+    <button onClick={() => logout()}>Logout</button>
+  </div>
+);
+
 };
 
 export default RightSidebar;
