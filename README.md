@@ -4,22 +4,22 @@
 
 ## ✨ Features
 
-### 🎨 Frontend
-- Built with React.js, HTML, CSS, and JavaScript  
-- Responsive chat interface with left sidebar, chat box, and right sidebar  
-- App-wide state management using React Context API  
-- Search users by username and start new chats  
-- Upload and send images or videos via Cloudinary  
-- Real-time message updates and notifications  
-- User profile management (avatar, name, bio)  
+- 🎨 **Frontend:**  
+  - Built with React.js, HTML, CSS, and JavaScript  
+  - Responsive chat interface with left sidebar, chat box, and right sidebar  
+  - App-wide state management using React Context API  
+  - Search users by username and start new chats  
+  - Upload and send images or videos via Cloudinary  
+  - Real-time message updates and notifications  
+  - User profile management (avatar, name, bio)  
 
-### ⚙️ Backend
-- Firebase Firestore for real-time data storage  
-- Firebase Authentication for signup, login, and password reset  
-- Cloudinary for media storage (images & videos)  
-- Firestore collections for users, chats, and messages  
-- Seen and last active status tracking  
-- Real-time updates using Firestore `onSnapshot`  
+- ⚙️ **Backend:**  
+  - Firebase Firestore for real-time data storage  
+  - Firebase Authentication for signup, login, and password reset  
+  - Cloudinary for media storage (images & videos)  
+  - Firestore collections for users, chats, and messages  
+  - Seen and last active status tracking  
+  - Real-time updates using Firestore `onSnapshot`  
 
 ## 🔑 Key Functionality
 - User signup, login, and password reset  
@@ -36,5 +36,5 @@ https://chat-nova-swart.vercel.app/
 
 ## 👨‍💻 Author
 
-- **Muhammad Ashhadullah Zaheer**
-- **LinkedIn** : https://www.linkedin.com/in/muhammad-ashhadullah-zaheer-41194a340/
+- **Muhammad Ashhadullah Zaheer**  
+- 🔗 LinkedIn: [Muhammad Ashhadullah Zaheer](https://www.linkedin.com/in/muhammad-ashhadullah-zaheer-41194a340/)  
