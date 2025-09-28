@@ -137,7 +137,9 @@
 }
 /* Responsive ChatBox (max-width: 900px) */
 @media (max-width: 900px) {
-  
+  body, html {
+    overflow-x: hidden;   /* prevent sideways scroll */
+  }
   /* Minimal ordering fix — keeps header on top when .chat-box is reversed */
 .chat-user { order: 2; }   /* make header appear first when container is reversed */
 .chat-msg  { order: 1; }   /* messages area after header */
@@ -148,7 +150,8 @@
   display: flex;
   flex-direction: column-reverse; /* newest messages appear at bottom */
   overflow-y: auto;
-  padding-bottom: 72px;    /* space for input so messages aren't hidden */
+  padding-bottom: 72px;  
+  max-width: 100%;  /* space for input so messages aren't hidden */
 }
   .chat-box {
     flex: 1;                     /* take available space */
@@ -159,6 +162,7 @@
     display: flex;
     flex-direction: column-reverse; /* keep order */
     gap: 8px;      /* space for input bar */
+    overflow-x: hidden; 
   }
 
   
