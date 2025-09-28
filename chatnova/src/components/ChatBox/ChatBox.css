@@ -154,7 +154,7 @@
     flex: 1;                     /* take available space */
     background-color: #f1f5ff;
     margin: 0;
-    width: 100%;
+    max-width: 100%;
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse; /* keep order */
