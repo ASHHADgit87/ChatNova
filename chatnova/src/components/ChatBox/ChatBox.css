@@ -205,7 +205,8 @@
     align-items: center;
     padding: 8px 12px;
     margin-top: auto;            /* stick at bottom inside wrapper */
-    border-top: 1px solid #ddd;  /* optional separator */
+    border-top: 1px solid #ddd; 
+    max-width: 100%; /* optional separator */
   }
 
   .chat-input input[type="text"] {
