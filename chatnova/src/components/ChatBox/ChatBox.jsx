@@ -146,7 +146,10 @@ const ChatBox = () => {
       </div>
       <div className="chat-msg">
         {messages.map((msg, index) => (
-          <div className={msg.sId == userData.id ? "s-msg" : "r-msg"}>
+          <div
+  key={msg.createdAt?.seconds + "-" + msg.sId || index}
+  className={msg.sId === userData.id ? "s-msg" : "r-msg"}
+>
             {msg["image"] ? (
               <img className="msg-img" src={msg.image} alt="" />
             ) : msg["video"] ? (
