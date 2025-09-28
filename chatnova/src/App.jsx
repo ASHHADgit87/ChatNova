@@ -13,13 +13,15 @@ const App = () => {
   const { loadUserData } = useContext(AppContext);
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        navigate("/chat");
-        await loadUserData(user.uid);
-      } else {
-        navigate("/");
-      }
-    });
+  console.log("onAuthStateChanged user:", user);
+  if (user) {
+    console.log("calling loadUserData with uid:", user.uid);
+    await loadUserData(user.uid);
+  } else {
+    console.log("no user, navigate to login");
+    navigate("/");
+  }
+});
   }, []);
   return (
     <>

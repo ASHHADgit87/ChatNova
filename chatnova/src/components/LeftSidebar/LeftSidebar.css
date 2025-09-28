@@ -126,16 +126,18 @@
 .friends.border div span {
   color: #008080;
 }
-
+/* Left sidebar responsive improvements */
 @media (max-width: 900px) {
   .ls {
+    width: 100%;
+    height: 100vh;          /* full viewport height */
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
+    z-index: 20;
     background: #3d0c51;
+    display: flex;
+    flex-direction: column; /* so list + search stack properly */
   }
 
   .ls.hidden {
@@ -143,14 +145,23 @@
   }
 
   .ls-top {
-    padding: 15px;
+    padding: 12px;
   }
 
   .ls-search {
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   .ls-list {
-    height: calc(100% - 120px);
+    flex: 1;               /* take remaining space */
+    overflow-y: auto;      /* scroll only list part */
+  }
+
+  .friends img {
+    width: 44px;
+  }
+
+  .friends {
+    padding: 12px 16px;
   }
 }

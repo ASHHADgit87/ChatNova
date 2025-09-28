@@ -135,13 +135,40 @@
 .chat-user .arrow {
   display: none;
 }
+/* Responsive ChatBox (max-width: 900px) */
 @media (max-width: 900px) {
+  
+  /* Minimal ordering fix — keeps header on top when .chat-box is reversed */
+.chat-user { order: 2; }   /* make header appear first when container is reversed */
+.chat-msg  { order: 1; }   /* messages area after header */
+.chat-input{ order: 0; }   /* keep input at the end (bottom) */
+
+.chat-msg {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column-reverse; /* newest messages appear at bottom */
+  overflow-y: auto;
+  padding-bottom: 72px;    /* space for input so messages aren't hidden */
+}
   .chat-box {
-    height: 75vh;
-    position: relative;
+    flex: 1;                     /* take available space */
     background-color: #f1f5ff;
-    width: 391px;
-    margin: 0 auto;
+    margin: 0;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse; /* keep order */
+    gap: 8px;      /* space for input bar */
+  }
+
+  
+
+  .chat-user img:first-child {
+    width: 40px;
+  }
+
+  .chat-user p {
+    font-size: 16px;
   }
 
   .chat-user .arrow {
@@ -154,16 +181,35 @@
     display: none;
   }
 
-  .chat-msg {
-    height: calc(100% - 120px);
-    padding-bottom: 60px;
+  .s-msg,
+  .r-msg {
+    padding: 6px 12px;
+  }
+
+  .msg {
+    max-width: 70%;
+    font-size: 14px;
+    padding: 8px 10px;
+    word-break: break-word;
+  }
+
+  .msg-img {
+    max-width: 60%;
+    margin-bottom: 12px;
   }
 
   .chat-input {
+    background: white;
+    display: flex;
+    gap: 8px;
+    align-items: center;
     padding: 8px 12px;
+    margin-top: auto;            /* stick at bottom inside wrapper */
+    border-top: 1px solid #ddd;  /* optional separator */
   }
 
-  .chat-input input {
-    font-size: 14px;
+  .chat-input input[type="text"] {
+    flex: 1;
+    font-size: 15px;
   }
 }

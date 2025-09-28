@@ -19,8 +19,11 @@ const AppContextProvider = (props) => {
   const loadUserData = async (uid) => {
     try {
       const userRef = doc(db, "users", uid);
+      console.log("userRef path:", userRef.path);
       const userSnap = await getDoc(userRef);
+      console.log("userSnap.exists:", userSnap.exists());
       const data = userSnap.data() || {};
+      console.log("loaded user data:", data);
       setUserData(data);
 
       if (data.avatar && data.name) {

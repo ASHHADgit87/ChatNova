@@ -19,6 +19,13 @@
   text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
 }
 
+.chat-container {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  gap: 12px;
+  align-items: stretch;
+}
+
 @media (max-width: 900px) {
   .chat-container {
     display: flex;
