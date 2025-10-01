@@ -9,6 +9,10 @@ import {
   getDoc,
   getDocs,
   query,
+  orderBy,
+  startAt,
+  endAt,
+  limit,
   serverTimestamp,
   setDoc,
   updateDoc,
@@ -33,43 +37,61 @@ export const LeftSidebar = () => {
   const [ShowSearch, setShowSearch] = useState(false);
 
   const inputHandler = async (e) => {
-    try {
-      const input = e.target.value;
-      if (input) {
-        setShowSearch(true);
-        const userRef = collection(db, "users");
-        const q = query(
-          userRef,
-          where("username", "==", input.toLowerCase().trim())
+  try {
+    const input = e.target.value;
+    if (input) {
+      setShowSearch(true);
+
+      // normalize prefix (username stored lowercased at signup)
+      const prefix = input.toLowerCase().trim();
+
+      // Firestore collection ref
+      const userRef = collection(db, "users");
+
+      // prefix search: usernames starting with prefix
+      const q = query(
+        userRef,
+        orderBy("username"),
+        startAt(prefix),
+        endAt(prefix + "\uf8ff"),
+        limit(20) // optional: cap results
+      );
+
+      const querySnap = await getDocs(q);
+
+      // Map results and exclude current user
+      const matched = querySnap.docs
+        .map((d) => d.data())
+        .filter((u) => u.id !== userData?.id);
+
+      if (matched.length) {
+        const searchedUser = matched[0];
+
+        // check if chat already exists
+        const userExist = chatData?.some(
+          (chat) =>
+            chat.rId === searchedUser.id ||
+            chat.userData.username.toLowerCase().trim() ===
+              searchedUser.username.toLowerCase().trim()
         );
-        const querySnap = await getDocs(q);
 
-        if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
-          const searchedUser = querySnap.docs[0].data();
-
-          // check if chat already exists
-          const userExist = chatData?.some(
-            (chat) =>
-              chat.rId === searchedUser.id ||
-              chat.userData.username.toLowerCase().trim() ===
-                searchedUser.username.toLowerCase().trim()
-          );
-
-          if (!userExist) {
-            setUser(searchedUser);
-          } else {
-            setUser(null); 
-          }
+        if (!userExist) {
+          setUser(searchedUser);
         } else {
           setUser(null);
         }
       } else {
-        setShowSearch(false);
+        setUser(null);
       }
-    } catch (error) {
-      console.error("Search error:", error);
+    } else {
+      setShowSearch(false);
+      setUser(null);
     }
-  };
+  } catch (error) {
+    console.error("Search error:", error);
+    setUser(null);
+  }
+};
 
   const addChat = async () => {
     const messagesRef = collection(db, "messages");
