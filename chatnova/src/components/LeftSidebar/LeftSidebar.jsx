@@ -12,12 +12,8 @@ import {
   serverTimestamp,
   setDoc,
   updateDoc,
-  orderBy,
-  startAt,
-  endAt,
-  limit
+  where,
 } from "firebase/firestore";
-
 import { db } from "../../config/Firebase-temp";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
@@ -39,51 +35,43 @@ export const LeftSidebar = () => {
   const [ShowSearch, setShowSearch] = useState(false);
 
   const inputHandler = async (e) => {
-  try {
-    const input = e.target.value;
-    if (input) {
-      setShowSearch(true);
-      const prefix = input.toLowerCase().trim();
-      const userRef = collection(db, "users");
-      const q = query(
-        userRef,
-        orderBy("username"),
-        startAt(prefix),
-        endAt(prefix + "\uf8ff"),
-        limit(20) 
-      );
-
-      const querySnap = await getDocs(q);
-      const matched = querySnap.docs
-        .map((d) => d.data())
-        .filter((u) => u.id !== userData?.id);
-
-      if (matched.length) {
-        const searchedUser = matched[0];
-        const userExist = chatData?.some(
-          (chat) =>
-            chat.rId === searchedUser.id ||
-            chat.userData.username.toLowerCase().trim() ===
-              searchedUser.username.toLowerCase().trim()
+    try {
+      const input = e.target.value;
+      if (input) {
+        setShowSearch(true);
+        const userRef = collection(db, "users");
+        const q = query(
+          userRef,
+          where("username", "==", input.toLowerCase().trim())
         );
+        const querySnap = await getDocs(q);
 
-        if (!userExist) {
-          setUser(searchedUser);
+        if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
+          const searchedUser = querySnap.docs[0].data();
+
+          // check if chat already exists
+          const userExist = chatData?.some(
+            (chat) =>
+              chat.rId === searchedUser.id ||
+              chat.userData.username.toLowerCase().trim() ===
+                searchedUser.username.toLowerCase().trim()
+          );
+
+          if (!userExist) {
+            setUser(searchedUser);
+          } else {
+            setUser(null);
+          }
         } else {
           setUser(null);
         }
       } else {
-        setUser(null);
+        setShowSearch(false);
       }
-    } else {
-      setShowSearch(false);
-      setUser(null);
+    } catch (error) {
+      console.error("Search error:", error);
     }
-  } catch (error) {
-    console.error("Search error:", error);
-    setUser(null);
-  }
-};
+  };
 
   const addChat = async () => {
     const messagesRef = collection(db, "messages");
@@ -210,7 +198,7 @@ export const LeftSidebar = () => {
           </div>
         ) : (
           chatData.map((item, index) => {
-  if (!item.userData) return null; 
+  if (!item.userData) return null; // skip broken chats
   return (
     <div
       onClick={() => setChat(item)}
@@ -233,5 +221,3 @@ export const LeftSidebar = () => {
     </div>
   );
 };
-
-export default LeftSidebar;
