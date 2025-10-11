@@ -34,7 +34,7 @@
 
 https://chat-nova-swart.vercel.app/
 
-## 👨‍💻 Author
+## 👨‍💻 Developer
 
 - **Muhammad Ashhadullah Zaheer**  
 - 🔗 LinkedIn: [Muhammad Ashhadullah Zaheer](https://www.linkedin.com/in/muhammad-ashhadullah-zaheer-41194a340/)  
