@@ -2,6 +2,14 @@
 
 **Chat Nova** is a real-time chat application built with **React.js** and **Firebase**, offering instant messaging with text, images, and videos in a modern, interactive interface.
 
+## 🏛️ Architecture
+
+**Chat Nova follows a Client–Server Architecture with Serverless / BaaS backend**, providing real-time communication, scalability, and secure cloud storage.
+
+## ☁️ SaaS 
+
+Chat Nova follows the Software as a Service (SaaS) model by providing centrally hosted real-time messaging functionality that users access through authenticated accounts without local installation.
+
 ## ✨ Features
 
 - 🎨 **Frontend:**  
