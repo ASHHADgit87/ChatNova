@@ -13,10 +13,13 @@
 }
 
 .rs-profile img {
-  width: 110px;
+  width: 25vw; 
+  max-width: 110px; 
   aspect-ratio: 1/1;
   border-radius: 50%;
+  object-fit: cover;
 }
+
 
 .rs-profile h3 {
   font-size: 18px;
