@@ -174,8 +174,7 @@ export const LeftSidebar = () => {
             <img src={assets.menu_icon} alt="" />
             <div className="sub-menu">
               <p onClick={() => navigate("/profile")}>Edit Profile</p>
-              <hr />
-              <p>Logout</p>
+              
             </div>
           </div>
         </div>
