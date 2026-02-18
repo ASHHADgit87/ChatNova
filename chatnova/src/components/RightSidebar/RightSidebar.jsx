@@ -22,21 +22,25 @@ const RightSidebar = () => {
   return chatUser ? (
   <div className={`rs ${rightSidebarVisible ? "visible" : ""}`}>
     <div className="rs-profile">
-      <img
-        onClick={() => setRightSidebarVisible(false)} 
-        src={assets.arrow_icon}
-        className="arrow"
-        alt=""
-      />
-      <img src={chatUser.userData.avatar} alt="" />
-      <h3>
-        {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
-          <img src={assets.green_dot} className="dot" alt="" />
-        ) : null}{" "}
-        {chatUser.userData.name}
-      </h3>
-      <p>{chatUser.userData.bio}</p>
-    </div>
+  <img
+    onClick={() => setRightSidebarVisible(false)}
+    src={assets.arrow_icon}
+    className="arrow"
+    alt=""
+  />
+  <div className="img-overlay-wrapper" style={{ width: "110px", aspectRatio: "1/1" }}>
+    <img src={chatUser.userData.avatar} alt="" />
+    <div className="overlay" onContextMenu={(e) => e.preventDefault()} />
+  </div>
+  <h3>
+    {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
+      <img src={assets.green_dot} className="dot" alt="" />
+    ) : null}{" "}
+    {chatUser.userData.name}
+  </h3>
+  <p>{chatUser.userData.bio}</p>
+</div>
+
     <hr />
     <div className="rs-media">
       <p>Media</p>

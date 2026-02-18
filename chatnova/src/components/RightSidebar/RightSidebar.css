@@ -105,3 +105,35 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.img-overlay-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.img-overlay-wrapper img {
+  display: block;
+  width: 100%;
+  border-radius: inherit; /* keeps the same rounded corners */
+  object-fit: cover;
+  user-select: none;      /* prevents text selection */
+  pointer-events: none;   /* prevents direct clicks */
+}
+
+.img-overlay-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;        /* blocks right-click */
+  border-radius: inherit;
+}
+
+.img-overlay-wrapper img,
+.img-overlay-wrapper .overlay {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}

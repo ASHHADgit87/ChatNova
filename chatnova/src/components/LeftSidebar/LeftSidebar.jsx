@@ -190,32 +190,39 @@ export const LeftSidebar = () => {
       </div>
 
       <div className="ls-list">
-        {ShowSearch && user ? (
-          <div onClick={addChat} className="friends add-user">
-            <img src={user.avatar} alt="" />
-            <p>{user.name}</p>
-          </div>
-        ) : (
-          chatData.map((item, index) => {
-  if (!item.userData) return null; // skip broken chats
-  return (
-    <div
-      onClick={() => setChat(item)}
-      key={index}
-      className={`friends ${
-        item.messageSeen || item.messagesId === messagesId ? "" : "border"
-      }`}
-    >
-      <img src={item.userData.avatar} alt="" />
-      <div>
-        <p>{item.userData.name}</p>
-        <span>{item.lastMessage}</span>
-      </div>
+        {/* Search result */}
+{ShowSearch && user ? (
+  <div onClick={addChat} className="friends add-user">
+    <div className="img-overlay-wrapper" style={{ width: "35px", aspectRatio: "1/1" }}>
+      <img src={user.avatar} alt="" />
+      <div className="overlay" onContextMenu={(e) => e.preventDefault()} />
     </div>
-  );
-})
+    <p>{user.name}</p>
+  </div>
+) : (
+  chatData.map((item, index) => {
+    if (!item.userData) return null; // skip broken chats
+    return (
+      <div
+        onClick={() => setChat(item)}
+        key={index}
+        className={`friends ${
+          item.messageSeen || item.messagesId === messagesId ? "" : "border"
+        }`}
+      >
+        <div className="img-overlay-wrapper" style={{ width: "35px", aspectRatio: "1/1" }}>
+          <img src={item.userData.avatar} alt="" />
+          <div className="overlay" onContextMenu={(e) => e.preventDefault()} />
+        </div>
+        <div>
+          <p>{item.userData.name}</p>
+          <span>{item.lastMessage}</span>
+        </div>
+      </div>
+    );
+  })
+)}
 
-        )}
       </div>
     </div>
   );
