@@ -128,10 +128,12 @@ const ChatBox = () => {
   return chatUser ? (
     <div className={`chat-box ${chatVisible ? "" : "hidden"}`}>
       <div className="chat-user">
-        <img src={chatUser.userData.avatar} alt="" />
-        <p onClick={() => setRightSidebarVisible(true)} 
-    style={{ cursor: "pointer" }}>
-          {chatUser.userData.name}
+  <div className="img-overlay-wrapper" style={{ width: '38px', aspectRatio: '1/1' }}>
+    <img src={chatUser.userData.avatar} alt="" />
+    <div className="overlay" onContextMenu={(e) => e.preventDefault()} />
+  </div>
+  <p onClick={() => setRightSidebarVisible(true)} style={{ cursor: "pointer" }}>
+    {chatUser.userData.name}
           {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
             <img className="dot" src={assets.green_dot} alt="" />
           ) : null}
@@ -159,16 +161,15 @@ const ChatBox = () => {
             )}
 
             <div>
-              <img
-                src={
-                  msg.sId === userData.id
-                    ? userData.avatar
-                    : chatUser.userData.avatar
-                }
-                alt=""
-              />
-              <p>{convertTimestamp(msg.createdAt)}</p>
-            </div>
+  <div className="img-overlay-wrapper" style={{ width: '27px', aspectRatio: '1/1' }}>
+    <img
+      src={msg.sId === userData.id ? userData.avatar : chatUser.userData.avatar}
+      alt=""
+    />
+    <div className="overlay" onContextMenu={(e) => e.preventDefault()} />
+  </div>
+  <p>{convertTimestamp(msg.createdAt)}</p>
+</div>
           </div>
         ))}
       </div>

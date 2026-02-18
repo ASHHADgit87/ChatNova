@@ -139,33 +139,33 @@
 .chat-user .arrow {
   display: none;
 }
-/* Responsive ChatBox (max-width: 900px) */
+
 @media (max-width: 900px) {
   body, html {
-    overflow-x: hidden;   /* prevent sideways scroll */
+    overflow-x: hidden;  
   }
-  /* Minimal ordering fix — keeps header on top when .chat-box is reversed */
-.chat-user { order: 2; }   /* make header appear first when container is reversed */
-.chat-msg  { order: 1; }   /* messages area after header */
-.chat-input{ order: 0; }   /* keep input at the end (bottom) */
+  
+.chat-user { order: 2; }   
+.chat-msg  { order: 1; }   
+.chat-input{ order: 0; }   
 
 .chat-msg {
   flex: 1 1 auto;
   display: flex;
-  flex-direction: column-reverse; /* newest messages appear at bottom */
+  flex-direction: column-reverse; 
   overflow-y: auto;
   padding-bottom: 72px;  
-  max-width: 100%;  /* space for input so messages aren't hidden */
+  max-width: 100%; 
 }
   .chat-box {
-    flex: 1;                     /* take available space */
+    flex: 1;                    
     background-color: #f1f5ff;
     margin: 0;
     max-width: 100%;
     overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse; /* keep order */
-    gap: 8px;      /* space for input bar */
+    flex-direction: column-reverse;
+    gap: 8px;   
     overflow-x: hidden; 
   }
 
@@ -214,20 +214,56 @@
     gap: 8px;
     align-items: center;
     padding: 8px 12px;
-    margin-top: auto;            /* stick at bottom inside wrapper */
+    margin-top: auto;            
     border-top: 1px solid #ddd; 
-    max-width: 100%; /* optional separator */
+    max-width: 100%;
     box-sizing: border-box;
   }
 
   .chat-input input[type="text"] {
-    flex: 1 1 auto;   /* ✅ allows shrinking */
-  min-width: 0;     /* ✅ prevents overflow */
+    flex: 1 1 auto;  
+  min-width: 0;     
     font-size: 15px;
   }
   .chat-input img {
-  flex-shrink: 0;   /* ✅ keeps button visible */
+  flex-shrink: 0;   
   width: 28px;
   cursor: pointer;
 }
 }
+.img-overlay-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;  
+  overflow: hidden;    
+}
+
+
+.img-overlay-wrapper img {
+  display: block;
+  width: 100%;
+  border-radius: inherit; 
+  object-fit: cover;
+  user-select: none;      
+  pointer-events: none;   
+}
+
+.img-overlay-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;        
+  border-radius: inherit;
+}
+
+.img-overlay-wrapper img,
+.img-overlay-wrapper .overlay {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
