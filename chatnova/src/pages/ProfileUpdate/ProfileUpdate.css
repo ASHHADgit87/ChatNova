@@ -19,8 +19,8 @@
 .profile-pic {
   max-width: 160px;
   aspect-ratio: 1/1;
-  margin: 20px auto;
   border-radius: 50%;
+  object-fit: cover; 
 }
 
 .profile form {
@@ -46,6 +46,7 @@
   width: 50px;
   aspect-ratio: 1/1;
   border-radius: 50%;
+  object-fit: cover; 
 }
 
 .profile input,

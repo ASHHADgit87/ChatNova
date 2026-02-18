@@ -14,6 +14,7 @@
 .chat-user img {
   width: 25px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .chat-user img:first-child {
@@ -75,7 +76,10 @@
   width: 27px;
   aspect-ratio: 1/1;
   border-radius: 50px;
+  object-fit: cover; 
 }
+
+
 .s-msg,
 .r-msg {
   display: flex;
@@ -168,8 +172,10 @@
   
 
   .chat-user img:first-child {
-    width: 40px;
-  }
+  width: 38px;
+  aspect-ratio: 1/1;
+  object-fit: cover; 
+}
 
   .chat-user p {
     font-size: 16px;
