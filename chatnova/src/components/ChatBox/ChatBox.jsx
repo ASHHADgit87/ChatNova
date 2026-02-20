@@ -29,40 +29,74 @@ const ChatBox = () => {
   const [input, setInput] = useState("");
 
   const sendMessage = async () => {
-    try {
-      if (input && messagesId) {
-        await updateDoc(doc(db, "messages", messagesId), {
-          messages: arrayUnion({
-            sId: userData.id,
-            text: input,
-            createdAt: new Date(),
+  try {
+    if (!input || !messagesId) return;
+
+    
+    await updateDoc(doc(db, "messages", messagesId), {
+      messages: arrayUnion({
+        sId: userData.id,
+        text: input,
+        createdAt: new Date(),
+      }),
+    });
+
+    
+    const userIDs = [chatUser.rId, userData.id];
+
+    for (const id of userIDs) {
+      const userChatsRef = doc(db, "chats", id);
+      const userChatsSnapshot = await getDoc(userChatsRef);
+
+      if (!userChatsSnapshot.exists()) continue;
+
+      const userChatData = userChatsSnapshot.data();
+      const chatIndex = userChatData.chatsData.findIndex(
+        (c) => c.messagesId === messagesId
+      );
+
+      if (chatIndex === -1) continue;
+
+      
+      userChatData.chatsData[chatIndex].lastMessage = input.slice(0, 30);
+      userChatData.chatsData[chatIndex].updatedAt = Date.now();
+
+      if (userChatData.chatsData[chatIndex].rId === userData.id) {
+        userChatData.chatsData[chatIndex].messageSeen = false;
+      }
+
+      await updateDoc(userChatsRef, {
+        chatsData: userChatData.chatsData,
+      });
+
+      
+      if (id !== userData.id && chatUser?.userData?.fcmToken) {
+        await fetch("https://fcm.googleapis.com/fcm/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "key=AIzaSyAQlSzLYWIg_wv-0NKbrQDFg3xD7u-zEzE"
+, 
+          },
+          body: JSON.stringify({
+            to: chatUser.userData.fcmToken,
+            notification: {
+              title: userData.name,
+              body: input,          
+              icon: "/logo192.png", 
+            },
           }),
         });
-        const userIDs = [chatUser.rId, userData.id];
-        userIDs.forEach(async (id) => {
-          const userChatsRef = doc(db, "chats", id);
-          const userChatsSnapshot = await getDoc(userChatsRef);
-          if (userChatsSnapshot.exists()) {
-            const userChatData = userChatsSnapshot.data();
-            const chatIndex = userChatData.chatsData.findIndex(
-              (c) => c.messagesId === messagesId
-            );
-            userChatData.chatsData[chatIndex].lastMessage = input.slice(0, 30);
-            userChatData.chatsData[chatIndex].updatedAt = Date.now();
-            if (userChatData.chatsData[chatIndex].rId === userData.id) {
-              userChatData.chatsData[chatIndex].messageSeen = false;
-            }
-            await updateDoc(userChatsRef, {
-              chatsData: userChatData.chatsData,
-            });
-          }
-        });
       }
-    } catch (error) {
-      toast.error(error.message);
     }
+
+    
     setInput("");
-  };
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
 
   const sendImage = async (e) => {
     try {

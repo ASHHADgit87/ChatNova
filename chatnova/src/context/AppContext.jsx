@@ -2,6 +2,9 @@ import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { createContext, useEffect, useRef, useState } from "react";
 import { auth, db } from "../config/Firebase-temp";
 import { useNavigate } from "react-router-dom";
+import { messaging } from "../config/Firebase-temp";
+import { getToken } from "firebase/messaging";
+
 
 export const AppContext = createContext();
 
@@ -33,6 +36,21 @@ const AppContextProvider = (props) => {
       }
 
       await updateDoc(userRef, { lastSeen: Date.now() });
+      if (Notification.permission === "default") {
+  const permission = await Notification.requestPermission();
+
+  if (permission === "granted") {
+    const token = await getToken(messaging, {
+      vapidKey: "BMDIY0B0ui-jwYDAobKw0xfwniN1Y-p_wJqaK6WuZz4Huj5g2QjTQ-UvG_ShwY2N4BHSgUJujIsRPrNNTbyTGQY",
+    });
+
+    console.log("FCM Token:", token);
+
+    await updateDoc(userRef, {
+      fcmToken: token,
+    });
+  }
+}
 
       if (intervalRef.current) clearInterval(intervalRef.current);
       intervalRef.current = setInterval(async () => {
