@@ -70,24 +70,6 @@ const ChatBox = () => {
       });
 
       
-      if (id !== userData.id && chatUser?.userData?.fcmToken) {
-        await fetch("https://fcm.googleapis.com/fcm/send", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "key=AIzaSyAQlSzLYWIg_wv-0NKbrQDFg3xD7u-zEzE"
-, 
-          },
-          body: JSON.stringify({
-            to: chatUser.userData.fcmToken,
-            notification: {
-              title: userData.name,
-              body: input,          
-              icon: "/logo192.png", 
-            },
-          }),
-        });
-      }
     }
 
     

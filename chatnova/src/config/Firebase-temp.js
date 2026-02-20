@@ -1,5 +1,4 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 import {
   createUserWithEmailAndPassword,
@@ -31,7 +30,6 @@ const firebaseConfig = {
 // prevent duplicate init
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
-const messaging = getMessaging(app);
 
 const db = getFirestore(app);
 
@@ -96,4 +94,4 @@ const resetPass = async (email) => {
   }
 };
 
-export { signup, login, logout, auth, db, resetPass , messaging};
+export { signup, login, logout, auth, db, resetPass };
