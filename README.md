@@ -1,48 +1,86 @@
 # Chat Nova
 
-**Chat Nova** is a real-time chat application built with **React.js** and **Firebase**, offering instant messaging with text, images, and videos in a modern, interactive interface.
+**Chat Nova** is a real-time chat application built with **React.js** and **Firebase**, enabling instant messaging with support for text, images, and videos through a modern and responsive interface.
 
-## 🏛️ Architecture
+---
 
-**Chat Nova follows a Client–Server Architecture with Serverless / BaaS backend**, providing real-time communication, scalability, and secure cloud storage.
+# Architecture
 
-## ☁️ SaaS 
+Chat Nova follows a **Client–Server Architecture with a Serverless Backend (BaaS)**, ensuring real-time communication, scalability, and secure cloud-based data handling.
 
-Chat Nova follows the Software as a Service (SaaS) model by providing centrally hosted real-time messaging functionality that users access through authenticated accounts without local installation.
+| Layer | Responsibility |
+|---|---|
+| Frontend | React.js chat interface and UI components |
+| Backend (BaaS) | Firebase services for authentication and database |
+| Real-Time Layer | Firestore listeners for instant updates |
+| Media Storage | Cloudinary for image and video handling |
 
-## ✨ Features
+---
 
-- 🎨 **Frontend:**  
-  - Built with React.js, HTML, CSS, and JavaScript  
-  - Responsive chat interface with left sidebar, chat box, and right sidebar  
-  - App-wide state management using React Context API  
-  - Search users by username and start new chats  
-  - Upload and send images or videos via Cloudinary  
-  - Real-time message updates and notifications  
-  - User profile management (avatar, name, bio)  
+# SaaS
 
-- ⚙️ **Backend:**  
-  - Firebase Firestore for real-time data storage  
-  - Firebase Authentication for signup, login, and password reset  
-  - Cloudinary for media storage (images & videos)  
-  - Firestore collections for users, chats, and messages  
-  - Seen and last active status tracking  
-  - Real-time updates using Firestore `onSnapshot`  
+Chat Nova follows the **Software as a Service (SaaS)** model, offering cloud-based real-time messaging that users can access through authenticated accounts without local installation.
 
-## 🔑 Key Functionality
-- User signup, login, and password reset  
-- Update profile with avatar, name, and bio  
-- Start new chats and maintain chat history  
-- Send text, images, and videos in real time  
-- Track last active and message seen status  
-- View all shared media in the chat’s right sidebar  
-- Notifications for new messages  
+---
 
-## 🚀 Getting Started
+# Features
+
+## Frontend
+
+| Feature | Description |
+|---|---|
+| Chat Interface | Responsive UI with sidebar, chat window, and user panel |
+| State Management | React Context API for global state handling |
+| User Search | Search users by username to start chats |
+| Media Sharing | Upload and send images and videos |
+| Notifications | Real-time message updates |
+
+---
+
+## Backend & Real-Time System
+
+| Feature | Description |
+|---|---|
+| Firebase Auth | User authentication (signup, login, password reset) |
+| Firestore DB | Stores users, chats, and messages |
+| Real-Time Sync | onSnapshot listeners for live updates |
+| Media Storage | Cloudinary integration for files |
+| Status Tracking | Seen messages and last active status |
+
+---
+
+# Key Functionality
+
+| Capability | Description |
+|---|---|
+| Authentication | Secure login and signup system |
+| Profile Management | Update avatar, name, and bio |
+| Real-Time Chat | Instant messaging with live updates |
+| Media Sharing | Send images and videos in chat |
+| Chat History | Persistent conversation storage |
+| Activity Tracking | Last seen and message status |
+
+---
+
+# Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React.js, HTML, CSS, JavaScript |
+| Backend | Firebase (Firestore + Authentication) |
+| Storage | Cloudinary |
+| State Management | React Context API |
+
+---
+
+# Live Demo
 
 https://chat-nova-swart.vercel.app/
 
-## 👨‍💻 Creator & Developer
+---
 
-- **Muhammad Ashhadullah Zaheer**  
-- 🔗 LinkedIn: [Muhammad Ashhadullah Zaheer](https://www.linkedin.com/in/muhammad-ashhadullah-zaheer-41194a340/)  
+# Creator & Developer
+
+**Muhammad Ashhadullah Zaheer**
+
+LinkedIn: https://www.linkedin.com/in/muhammad-ashhadullah-zaheer-41194a340/
